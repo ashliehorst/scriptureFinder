@@ -14,19 +14,11 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem fx:id="newFile" mnemonicParsing="false" text="New" />
-                  <MenuItem fx:id="openXml" mnemonicParsing="false" text="Open xml" />
-            <MenuItem fx:id="openTxt" mnemonicParsing="false" text="Open txt" />
+                  <MenuItem fx:id="openXml" mnemonicParsing="false" onAction="#openXml" text="Open xml" />
+            <MenuItem fx:id="openTxt" mnemonicParsing="false" onAction="#openTxt" text="Open txt" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem fx:id="saveTxt" mnemonicParsing="false" text="Save txt" />
-            <MenuItem fx:id="saveXml" mnemonicParsing="false" text="Save xml" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem fx:id="quit" mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem fx:id="reset" mnemonicParsing="false" text="Reset" />
+            <MenuItem fx:id="saveXml" mnemonicParsing="false" onAction="#saveXml" text="Save xml" />
+            <MenuItem fx:id="saveTxt" mnemonicParsing="false" onAction="#saveTxt" text="Save txt" />
           </items>
         </Menu>
       </menus>
@@ -35,7 +27,7 @@
       <items>
         <AnchorPane SplitPane.resizableWithParent="false">
           <children>
-            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Master" textAlignment="CENTER" wrapText="false">
+            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Journal" textAlignment="CENTER" wrapText="false">
               <font>
                 <Font size="18.0" fx:id="x1" />
               </font>
@@ -43,9 +35,10 @@
                 <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
               </textFill>
             </Label>
-                  <Label fx:id="entriesLoaded" layoutX="28.0" layoutY="73.0" text="Number of Entries Loaded:" />
-                  <Label fx:id="scriptLoaded" layoutX="44.0" layoutY="105.0" text="Scriptures found: " />
-                  <Label fx:id="termsLoaded" layoutX="44.0" layoutY="142.0" text="Topics Found: " />
+                  <Label fx:id="entriesLoaded" layoutX="28.0" layoutY="73.0" text="Entries Found:" />
+                  <Label fx:id="scriptLoaded" layoutX="27.0" layoutY="105.0" text="Scriptures Found: " />
+                  <Label fx:id="termsLoaded" layoutX="27.0" layoutY="141.0" text="Topics Found: " />
+                  <ListView fx:id="listEntry" layoutX="23.0" layoutY="200.0" prefHeight="235.0" prefWidth="174.0" />
           </children>
         </AnchorPane>
         <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
@@ -53,12 +46,12 @@
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
               <children>
                 <Label fx:id="journalContent" alignment="CENTER" layoutX="-17.0" layoutY="32.0" prefHeight="14.0" prefWidth="140.0" style="&#10;" text="New Entry" wrapText="true" />
-                        <TextArea fx:id="journalEntry" layoutX="14.0" layoutY="331.0" prefHeight="200.0" prefWidth="417.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="331.0" />
-                        <TextArea fx:id="entryTxt" layoutX="14.0" layoutY="63.0" prefHeight="200.0" prefWidth="420.0" AnchorPane.bottomAnchor="282.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="63.0" />
-                        <Label layoutX="17.0" layoutY="293.0" prefHeight="23.0" prefWidth="100.0" text="Journal" />
-                        <Label fx:id="date" layoutX="182.0" layoutY="32.0" text="Date" />
+                        <TextArea fx:id="journalEntry" layoutX="14.0" layoutY="296.0" prefHeight="235.0" prefWidth="417.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="296.0" />
+                        <TextArea fx:id="entryBox" layoutX="14.0" layoutY="63.0" prefHeight="147.0" prefWidth="420.0" AnchorPane.bottomAnchor="335.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="63.0" />
+                        <Label layoutX="14.0" layoutY="261.0" prefHeight="23.0" prefWidth="100.0" text="Journal" />
+                        <Label fx:id="date" layoutX="100.0" layoutY="32.0" text="Date (yyyy-mm-dd)" />
                         <TextField fx:id="dateTxt" layoutX="219.0" layoutY="27.0" AnchorPane.bottomAnchor="492.0" AnchorPane.leftAnchor="219.0" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="27.0" />
-                        <Button fx:id="newEntry" layoutX="324.0" layoutY="280.0" mnemonicParsing="false" text="Add Entry" />
+                        <Button fx:id="newEntry" layoutX="352.0" layoutY="232.0" mnemonicParsing="false" onAction="#newEntry" text="Add Entry" />
               </children>
             </AnchorPane>
           </content>
@@ -66,7 +59,11 @@
         <AnchorPane>
           <children>
             <Label fx:id="list" alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Details" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-                  <ListView layoutX="15.0" layoutY="75.0" prefHeight="246.0" prefWidth="187.0" AnchorPane.bottomAnchor="228.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="75.0" />
+                  <ListView fx:id="searchList" layoutX="15.0" layoutY="75.0" prefHeight="192.0" prefWidth="188.0" AnchorPane.bottomAnchor="284.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="75.0" />
+                  <TextField fx:id="searchTxt" layoutX="15.0" layoutY="375.0" prefHeight="25.0" prefWidth="188.0" />
+                  <Button fx:id="search" layoutX="15.0" layoutY="415.0" mnemonicParsing="false" onAction="#search" text="By Book" />
+                  <Button fx:id="searchTopic" layoutX="92.0" layoutY="415.0" mnemonicParsing="false" onAction="#searchTopic" text="By Topic" />
+                  <Label layoutX="15.0" layoutY="348.0" text="Search Entries:" />
           </children>
         </AnchorPane>
       </items>

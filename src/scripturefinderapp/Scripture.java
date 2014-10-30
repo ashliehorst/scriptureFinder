@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * SCRIPTURE CLASS
  * @author Ashlie
  */
 public class Scripture {
@@ -21,76 +21,80 @@ public class Scripture {
     private List<String> scriptureList;
     Scripture scripture;
     
+    /********************
+    * SCRIPTURE CONSTRUCTOR
+     ************/
     public Scripture() {
          scriptureList = new ArrayList<>(); 
     }
     
-    public Scripture(String book, int chapter, int verse) {
-            
-    }
-    
-    public Scripture(String book, int chapter) {
-        
-    }
-    
+    /********************
+    * ADD SCRIPTURE
+     ************/
      public void addScripture(String scripture) {
        scriptureList.add(scripture);
     }
     
+    /********************
+    * GET SCRIPTURE LIST
+     ************/
     public Scripture getScriptureList() {
         return scripture;
     }
     
+    /********************
+    * GET BOOK
+     ************/
     public String getBook () {
         return book;
     }
-            
+     
+    /********************
+    * SET BOOK
+     ************/
     public void setBook(String book) {
-       // if (validBook(x)) {
-        this.book = book;
-      //  }
-       // else {
-       //     System.out.println("Error: Not valid book"); 
-       // }       
+        this.book = book;     
     }
     
-    public boolean validBook(String x) {
-        return true;
-    }
-    
+    /********************
+    * GET CHAPTER
+     ************/
     public String getChapter() {
         return chapter; 
     }
     
+    /********************
+    * SET CHAPTER
+     ************/
     public void setChapter(String chapter) {
-      //  if (x < 0) {
        this.chapter = chapter;
-       // }
-       // else {
-       //     System.out.println("Error: Not valid chapter number");  
-       // }
     }
     
+    /********************
+    * GET START VERSE
+     ************/
     public String getStartVerse() { 
         return startVerse;
     }
     
+    /********************
+    * SET START VERSE
+     ************/
     public void setStartVerse(String verse) {
-       // if (x < 0) {
-        this.startVerse = verse;
-      //  }
-       // else {
-       //     System.out.println("Error: Not valid verse number");
-      //  }
-       
+        this.startVerse = verse;      
     }
     
-     public String getEndVerse() { 
+    /********************
+    * GET END VERSE
+     ************/
+    public String getEndVerse() { 
         return endVerse;
     }
     
+    /********************
+    * SET END VERSE
+     ************/
     public void setEndVerse(String verse) {
         this.endVerse = verse;
-    }
-    
+    }   
 }

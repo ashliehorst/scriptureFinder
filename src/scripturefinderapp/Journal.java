@@ -30,10 +30,9 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-   /**
-    * Written by Ashlie Horst
-    * Collaborated with Ernesto Afane, Alex Mitchell, Paul O'Neil, and Sam H.
-    */
+/********************
+* JOURNAL CLASS
+************/
 public class Journal {
     
      private List<String> list;
@@ -67,12 +66,10 @@ public class Journal {
      * RUN
      * Go through the terms and list of scriptures
      */
-    public void run() throws IOException {
+    public void run() {
         readMapOfLists();  
         readBookList();
         addEntryTopic();
-       // searchEntryTopicMap();
-       // searchEntryBookList();
     }
     
     /*****************
@@ -85,7 +82,7 @@ public class Journal {
 
      
     /*****************
-     * ADD ENTRY
+     * SEARCH DATE
      * @param entry 
      */
     public void searchDate() {
@@ -110,40 +107,9 @@ public class Journal {
     }
     
     /********************
-    * SEARCH ENTRY BOOK LIST
-    * Passing in the list of books
-     ************/
-    public void searchEntryBookList(String searchParam) throws IOException{ 
-        // Pass in the book "search" that the user inputted (string)
-        // Nothing has been matched yet
-        boolean isFound = false;
-        boolean first = true;
-            
-        // Go through the list of entries and compare books
-        for (Entry entry : entryList) {
-            for (int i = 0; i < entry.getScriptureList().size(); i++) {
-                Scripture s = entry.getScriptureList().get(i);
-                isFound = compareBooks(s.getBook(), searchParam);
-                
-                // If it is the first to be found, print out the book name
-                if (isFound && first) {
-                    System.out.println(s.getBook() + " is found in");
-                    first = false;
-                }
-                
-                //  Then print out the date
-                if (isFound) {
-                    System.out.println("\t" + entry.getDate());
-                    break;
-                }                       
-            }      
-        }
-    }
-    
-    /********************
     * READ BOOK LIST
     ***************/
-    public void readBookList() throws IOException{
+    public void readBookList() {
         // Open up the book.txt and put the books into a list
         prop = new Propert();
         String fileName = prop.getScriptureFile(); 
@@ -172,22 +138,21 @@ public class Journal {
     }
       
     /*************************
-    * GET TOPIC LIST
+    * GET TOPIC MAP
     ******************/
     public Map<String, String> getTopicMap(){
         return topicMap;
     }
        
     /*************************
-    * GET TOPIC LIST
+    * GET ENTRY LIST
     ******************/
     public List<Entry> getEntryList(){
         return entryList;
     }
     
     /******************
-    * SEARCH ENTRY TOPIC LIST
-    * Pass in the topic map
+    * ADD ENTRY TOPIC LIST
     *************/
     public void addEntryTopic(){
         // Go through the topic list from terms.txt
@@ -212,7 +177,7 @@ public class Journal {
      * READ MAP OF LISTS
      * Read the terms and put into a map
      */
-    public void readMapOfLists() throws IOException {
+    public void readMapOfLists() {
         prop = new Propert();
        String file = prop.getTopicFile(); 
 
@@ -244,7 +209,7 @@ public class Journal {
     }
     
       /*****************
-     * READ TITLES
+     * READ TXT
      * Reads the file into a list
      */
     public List<String> readTxt(String fileName) {
@@ -342,66 +307,9 @@ public class Journal {
         e.setContent(content);
     }   
     
-    /******************
-    * SEARCH ENTRY TOPIC LIST
-    * Pass in the topic map
-    *************/
-    public void searchEntryTopicMap(String searchParam){
-               boolean isFound = false;
-        boolean first = true;
-            
-        // Go through the list of entries and compare books
-        for (Entry entry : entryList) {
-            for (int i = 0; i < entry.getTopicList().size(); i++) {
-                String s = entry.getTopicList().get(i);
-                if (s.equals(searchParam)){
-                    System.out.println("\t" + entry.getDate());
-                }     
-  
-                                     
-            }      
-        }
-        // Go through the entry objects
-      // int c = 0;
-      // {
-           // System.out.println("true");
-          //  for (Entry ent : entryList) { 
-           //     for (String topicList : ent.getTopicList()) {
-           //     for (String t : topicMap.values()) {
-            //        if (topicMap.get(topicList).equals(topicMap.keySet().toString())) {
-           //             System.out.println(c + " " + t);
-            //        }
-                   // topicMap.keySet().toString();
-                    // c++;
-                  //  topicMap.get(topicSearch);
-                  // String a = topicMap.get(topicSearch);
-                //  String ab = topicMap.values();
-                  
-                //  System.out.println(a);
-                 //   String to = topicMap.get(topicList);
-                 // if (topicMap.containsKey(topicSearch)) {
-                      
-                //  }
-               // }
-            //}
-         //   }
-           
-       // if (topicMap.get(topicSearch).equals(topicMap.keySet()))
-            //    for (String t : ent.getTopicList()) {
-             //      if (t.equals(topicMap.get(term)) && t.equals(topicMap.get(topicSearch))) {
-              //         System.out.println(("Topic: '" + topicMap.get(term) + 
-              //          "' is found in " + ent.getDate())); 
-                       
-              //      }     
-              //  }                        
-          // }              
-      //  } // end of entry for loop           
-        System.out.println(("Ended search for '" + searchParam + "'"));         
-    }
-     
      /*****************
-     * FIND ENTRY
-     * Go through the list and make the entry objects
+     * MAKE SINGLE ENTRY
+     * Make a single the entry object
      * @param entry
      * @param content
      */
@@ -448,7 +356,7 @@ public class Journal {
      * @param ent
      * @return 
      */
-    public Document buildXmlDocument(List<Entry> ent) throws IOException {
+    public Document buildXmlDocument(List<Entry> ent) {
         Document doc = null;
         try {
                 // This was found at mkyong
@@ -513,7 +421,6 @@ public class Journal {
                 transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
                  
                 // Create the new file
-               // String newFile = "C:\\Users\\Ashlie\\Documents\\NetBeansProjects\\scripturefinderapp\\src\\scripturefinderapp\\inputFile.xml";
 		DOMSource source = new DOMSource(doc);
                 StreamResult result = new StreamResult(new File(file));          
 		transformer.transform(source, result);

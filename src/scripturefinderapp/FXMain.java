@@ -16,11 +16,15 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
- *
+ * Collaborators include Ernesto Afane, Paul O'Neil, and Sam Hibbard    
  * @author Ashlie
  */
 public class FXMain extends Application {
     
+    /********************
+    * START
+    * Get everything ready!
+     ************/
     @Override
     public void start(Stage primaryStage) {  
         
@@ -42,8 +46,10 @@ public class FXMain extends Application {
             ex.printStackTrace();
         } 
     }
+    
 
     /**
+     * MAIN
      * @param args the command line arguments
      */
     public static void main(String[] args) {
