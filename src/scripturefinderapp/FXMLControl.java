@@ -107,8 +107,6 @@ public class FXMLControl implements Initializable {
                     Logger.getLogger(FXMLControl.class.getName()).log(Level.SEVERE, null, ex);
                 }
                
-                // ERROR you need to clear the entry list first before you add more to it
-                //   Make sure it is empty
                 // TXT Display  
                 String text = "";
                 for (Entry entry : journal.getEntryList()) {
