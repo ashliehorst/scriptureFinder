@@ -70,6 +70,9 @@ public class Journal {
     public void run() throws IOException {
         readMapOfLists();  
         readBookList();
+        addEntryTopic();
+       // searchEntryTopicMap();
+       // searchEntryBookList();
     }
     
     /*****************
@@ -78,6 +81,17 @@ public class Journal {
      */
     public void addEntry(Entry entry) {
        entryList.add(entry);
+    }
+
+     
+    /*****************
+     * ADD ENTRY
+     * @param entry 
+     */
+    public void searchDate() {
+        for (Entry ent : entryList) {  
+            System.out.println(ent.getDate());
+        }
     }
 
     /****************
@@ -99,29 +113,21 @@ public class Journal {
     * SEARCH ENTRY BOOK LIST
     * Passing in the list of books
      ************/
-    public void searchEntryBookList(List<String> list) throws IOException{ 
+    public void searchEntryBookList(String searchParam) throws IOException{ 
         // Pass in the book "search" that the user inputted (string)
         // Nothing has been matched yet
         boolean isFound = false;
-        
-        // Go read in the appropriate file
-        readBookList();
-        
-        // Go through the list of books
-        for (String str : list) {
         boolean first = true;
             
         // Go through the list of entries and compare books
         for (Entry entry : entryList) {
-                      
             for (int i = 0; i < entry.getScriptureList().size(); i++) {
-                
                 Scripture s = entry.getScriptureList().get(i);
-                isFound = compareBooks(s.getBook(), str);
+                isFound = compareBooks(s.getBook(), searchParam);
                 
                 // If it is the first to be found, print out the book name
                 if (isFound && first) {
-                    System.out.println(s.getBook());
+                    System.out.println(s.getBook() + " is found in");
                     first = false;
                 }
                 
@@ -129,10 +135,9 @@ public class Journal {
                 if (isFound) {
                     System.out.println("\t" + entry.getDate());
                     break;
-                }                  
+                }                       
             }      
-        }      
-      }
+        }
     }
     
     /********************
@@ -184,20 +189,19 @@ public class Journal {
     * SEARCH ENTRY TOPIC LIST
     * Pass in the topic map
     *************/
-    public void searchEntryTopicMap(Map<String, String> map){
-
+    public void addEntryTopic(){
         // Go through the topic list from terms.txt
-        for (String term : map.keySet()) {
+        for (String term : topicMap.keySet()) {
             term = term.toLowerCase();
             
             // Go through the entry objects
-            for (Entry ent : entryList) {
+            for (Entry ent : getEntryList()) {
                 String con = ent.getContent();
                 con = con.toLowerCase(); 
              
                 if (con.contains(term)) {
-                    if (!(ent.getTopicList().contains(map.get(term)))) {
-                        ent.addTopic((map.get(term))); 
+                    if (!(ent.getTopicList().contains(topicMap.get(term)))) {
+                        ent.addTopic((topicMap.get(term))); 
                     }                          
                 }        
             } // end of entry for loop         
@@ -208,11 +212,10 @@ public class Journal {
      * READ MAP OF LISTS
      * Read the terms and put into a map
      */
-    public Map<String, String> readMapOfLists() throws IOException {
+    public void readMapOfLists() throws IOException {
         prop = new Propert();
-        String file = prop.getTopicFile(); 
-        
-        Map<String, String> map = new HashMap<>();
+       String file = prop.getTopicFile(); 
+
         try {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line;
@@ -231,16 +234,13 @@ public class Journal {
             String[] terms = valueList.split(",");
  
             for (String term : terms) {
-                map.put(term, key);
+                topicMap.put(term, key);
             }
         } // end of while
          reader.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }     
-
-        searchEntryTopicMap(map);
-        return map;
     }
     
       /*****************
@@ -307,7 +307,7 @@ public class Journal {
          
             // Split [book] [chapter]
             if (scripture.split(" ").length == 2) {
-                String temp = "";
+              //  String temp = "";
                 String[] scrip = scripture.split(" ");
                 // Set the book
                 scriptureObject.setBook(scrip[0]);
@@ -341,6 +341,63 @@ public class Journal {
         // Set content of the last entry!
         e.setContent(content);
     }   
+    
+    /******************
+    * SEARCH ENTRY TOPIC LIST
+    * Pass in the topic map
+    *************/
+    public void searchEntryTopicMap(String searchParam){
+               boolean isFound = false;
+        boolean first = true;
+            
+        // Go through the list of entries and compare books
+        for (Entry entry : entryList) {
+            for (int i = 0; i < entry.getTopicList().size(); i++) {
+                String s = entry.getTopicList().get(i);
+                if (s.equals(searchParam)){
+                    System.out.println("\t" + entry.getDate());
+                }     
+  
+                                     
+            }      
+        }
+        // Go through the entry objects
+      // int c = 0;
+      // {
+           // System.out.println("true");
+          //  for (Entry ent : entryList) { 
+           //     for (String topicList : ent.getTopicList()) {
+           //     for (String t : topicMap.values()) {
+            //        if (topicMap.get(topicList).equals(topicMap.keySet().toString())) {
+           //             System.out.println(c + " " + t);
+            //        }
+                   // topicMap.keySet().toString();
+                    // c++;
+                  //  topicMap.get(topicSearch);
+                  // String a = topicMap.get(topicSearch);
+                //  String ab = topicMap.values();
+                  
+                //  System.out.println(a);
+                 //   String to = topicMap.get(topicList);
+                 // if (topicMap.containsKey(topicSearch)) {
+                      
+                //  }
+               // }
+            //}
+         //   }
+           
+       // if (topicMap.get(topicSearch).equals(topicMap.keySet()))
+            //    for (String t : ent.getTopicList()) {
+             //      if (t.equals(topicMap.get(term)) && t.equals(topicMap.get(topicSearch))) {
+              //         System.out.println(("Topic: '" + topicMap.get(term) + 
+              //          "' is found in " + ent.getDate())); 
+                       
+              //      }     
+              //  }                        
+          // }              
+      //  } // end of entry for loop           
+        System.out.println(("Ended search for '" + searchParam + "'"));         
+    }
      
      /*****************
      * FIND ENTRY

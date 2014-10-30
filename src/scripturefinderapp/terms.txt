@@ -1,0 +1,17 @@
+Faith:faith,believe,belief,faithful,faithfulness,trust
+Repentance:repentance,repent,forsake,contrite
+Forgiveness:forgive,forgiveness,remission
+Priesthood:priesthood,priest,authority,ordain,aaronic,melchizedek,ordination,power
+Hope:hope,expectation
+Love:love,charity,grace,mercy,compassion
+Destruction:destruction,destroy,desolate,desolation,perish,waste
+Commandments:commandment,commandments,command,commands,law,laws,rule
+Seek:seek,sought,inquire,pray,ask,search
+Savior:savior,jesus,christ,son of god,bread of life,jehovah,advocate,lamb of god,son of man,redeemer
+Revelation:revelation,reveal,prophesy
+Baptism:baptism,baptize,baptized,born of water
+Covenants:covenant,covenants,promise
+Holy Ghost:holy ghost,holy spirit,the spirit,comforter
+Pride:pride,proud,hardhearted,stiffnecked
+Humility:humility,humble
+Happiness:happy,happiness,joy,rejoice
