@@ -31,7 +31,7 @@ public class FXMain extends Application {
             FXMLControl controller = (FXMLControl)loader.getController();
             controller.init(primaryStage);
             
-            Scene scene = new Scene(root, 300, 250);  
+            Scene scene = new Scene(root, 900, 650);  
             
             primaryStage.setTitle("Scripture Finder App");
             primaryStage.setScene(scene);

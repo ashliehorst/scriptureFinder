@@ -8,50 +8,32 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller = "scripturefinderapp.FXMLControl">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scripturefinderapp.FXMLControl">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
+            <MenuItem fx:id="newFile" mnemonicParsing="false" text="New" />
+                  <MenuItem fx:id="openXml" mnemonicParsing="false" text="Open xml" />
+            <MenuItem fx:id="openTxt" mnemonicParsing="false" text="Open txt" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
+            <MenuItem fx:id="saveTxt" mnemonicParsing="false" text="Save txt" />
+            <MenuItem fx:id="saveXml" mnemonicParsing="false" text="Save xml" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
+            <MenuItem fx:id="quit" mnemonicParsing="false" text="Quit" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Edit">
           <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+            <MenuItem fx:id="reset" mnemonicParsing="false" text="Reset" />
           </items>
         </Menu>
       </menus>
     </MenuBar>
     <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
-        <AnchorPane>
+        <AnchorPane SplitPane.resizableWithParent="false">
           <children>
             <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Master" textAlignment="CENTER" wrapText="false">
               <font>
@@ -61,20 +43,30 @@
                 <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
               </textFill>
             </Label>
+                  <Label fx:id="entriesLoaded" layoutX="28.0" layoutY="73.0" text="Number of Entries Loaded:" />
+                  <Label fx:id="scriptLoaded" layoutX="44.0" layoutY="105.0" text="Scriptures found: " />
+                  <Label fx:id="termsLoaded" layoutX="44.0" layoutY="142.0" text="Topics Found: " />
           </children>
         </AnchorPane>
         <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
           <content>
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
               <children>
-                <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="View" textAlignment="CENTER" textFill="$x2" wrapText="false" />
+                <Label fx:id="journalContent" alignment="CENTER" layoutX="-17.0" layoutY="32.0" prefHeight="14.0" prefWidth="140.0" style="&#10;" text="New Entry" wrapText="true" />
+                        <TextArea fx:id="journalEntry" layoutX="14.0" layoutY="331.0" prefHeight="200.0" prefWidth="417.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="331.0" />
+                        <TextArea fx:id="entryTxt" layoutX="14.0" layoutY="63.0" prefHeight="200.0" prefWidth="420.0" AnchorPane.bottomAnchor="282.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="63.0" />
+                        <Label layoutX="17.0" layoutY="293.0" prefHeight="23.0" prefWidth="100.0" text="Journal" />
+                        <Label fx:id="date" layoutX="182.0" layoutY="32.0" text="Date" />
+                        <TextField fx:id="dateTxt" layoutX="219.0" layoutY="27.0" AnchorPane.bottomAnchor="492.0" AnchorPane.leftAnchor="219.0" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="27.0" />
+                        <Button fx:id="newEntry" layoutX="324.0" layoutY="280.0" mnemonicParsing="false" text="Add Entry" />
               </children>
             </AnchorPane>
           </content>
         </ScrollPane>
         <AnchorPane>
           <children>
-            <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Details" textAlignment="CENTER" textFill="$x2" wrapText="false" />
+            <Label fx:id="list" alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Details" textAlignment="CENTER" textFill="$x2" wrapText="false" />
+                  <ListView layoutX="15.0" layoutY="75.0" prefHeight="246.0" prefWidth="187.0" AnchorPane.bottomAnchor="228.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="75.0" />
           </children>
         </AnchorPane>
       </items>
@@ -98,4 +90,3 @@
     </HBox>
   </children>
 </VBox>
-
